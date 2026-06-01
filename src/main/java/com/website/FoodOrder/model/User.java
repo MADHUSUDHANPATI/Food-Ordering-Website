@@ -1,6 +1,7 @@
 package com.website.FoodOrder.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.website.FoodOrder.DTO.RestaurantDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,11 +22,13 @@ public class User {
     private Long id;
 
     private String fullName;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private String email;
     private USER_ROLE role =USER_ROLE.USER_CUSTOMER;
 
-    @JsonIgnore  // while fetching the user details, we don't need order details. so json ignore
+    @JsonIgnore  // while fetching the user details, we don't need order details. so json ignore (postman)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
     private List<Order> orders = new ArrayList<>();
 

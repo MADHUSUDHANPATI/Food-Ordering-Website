@@ -27,7 +27,7 @@ public class AppConfig {
 
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth-> auth
-                        .requestMatchers("/api/admin/**").hasAnyRole("RESTAURANT_OWNER", "ADMIN")
+                        .requestMatchers("/api/admin/**").hasAnyAuthority("RESTAURANT_OWNER", "ADMIN")
                         .requestMatchers("/api/**").authenticated()
                         .anyRequest().permitAll()
                 );
@@ -38,7 +38,7 @@ public class AppConfig {
 
 
 
-        return null;
+        return http.build();
     }
 
     private CorsConfigurationSource coreConfigurationSource() {
@@ -49,7 +49,7 @@ public class AppConfig {
 
                 CorsConfiguration cfg=new CorsConfiguration();
                 cfg.setAllowedOrigins(Arrays.asList(
-                        "http://localhost:3000/"
+                        "http://localhost:3000"
                 ));
 
                 cfg.setAllowedMethods(Collections.singletonList("*"));

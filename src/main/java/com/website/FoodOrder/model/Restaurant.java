@@ -19,7 +19,7 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
+    @OneToOne        // This will put fk automatically based on who is the parent one.
     private User owner;
 
     private String name;
